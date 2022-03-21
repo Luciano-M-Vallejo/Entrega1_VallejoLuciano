@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Bibliography, Blogs, UserInfo
 
-# Register your models here.
+admin.site.register(Bibliography)
+admin.site.register(Blogs)
+admin.site.register(UserInfo)

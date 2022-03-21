@@ -1,0 +1,13 @@
+{% extends 'index/index.html' %}
+{% block meta_title_about %}
+    <title>Sobre Mi</title>
+{% endblock meta_title_about %}
+
+{% block header_image_text %}
+  <h1 class="mb-5">Soy Luciano Vallejo</h1>
+{% endblock header_image_text %}
+
+{% block templates %}
+    <h1>{{lastName}} - {{name}}</h1>
+    <h4>{{course}}</h4>
+{% endblock templates %}

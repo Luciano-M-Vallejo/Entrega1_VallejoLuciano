@@ -1,0 +1,29 @@
+{% extends 'index/index.html' %}
+{% block meta_title_about %}
+    <title>Busqueda</title>
+{% endblock meta_title_about %}
+
+{% block header_index %}
+{% endblock header_index %}
+
+{% block templates %}
+
+    <form action={% url 'searchBibliography' %} method="get">
+        {% csrf_token %}
+       <table>
+            {{searching.as_table}}
+        </table>
+        <button class="btn btn-primary" type="submit">Enviar</button>
+    </form> 
+    
+    {% if data %}
+     Se busco por el dato: <b> {{data}} </b>  y los resultados fueron
+     {% for biblio in  biblio_searching%}
+        <ul>
+            <li>{{biblio}}</li>
+        </ul>
+     {% endfor %}
+     {% else %}
+        No se encontraron datos con la busqueda de <b> {{data}} </b> 
+    {% endif %}
+{% endblock templates %}

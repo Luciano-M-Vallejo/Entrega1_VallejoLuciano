@@ -1,0 +1,25 @@
+{% extends 'index/index.html' %}
+{% block meta_title_about %}
+    <title>Agregar Bibliografia</title>
+{% endblock meta_title_about %}
+
+{% block header_index %}
+{% endblock header_index %}
+
+{% block templates %}
+
+    <form action={% url 'biblography' %} method="post">
+        {% csrf_token %}
+        {% comment %} Curso:
+            <input type="text" placeholder="Ingrese curso" name="curso">
+        Camada:
+            <input type="number" placeholder="Ingrese camada" name="camada">
+        <input type="submit" value="Enviar">
+    </form> {% endcomment %}
+       <table>
+            {{formBiblio.as_table}}
+        </table>
+        <button class="btn btn-primary" type="submit">Enviar</button>
+    </form> 
+    
+{% endblock templates %}
