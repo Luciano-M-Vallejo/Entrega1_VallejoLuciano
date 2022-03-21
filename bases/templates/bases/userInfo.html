@@ -1,6 +1,6 @@
 {% extends 'index/index.html' %}
 {% block meta_title_about %}
-    <title>Agregar Bibliografia</title>
+    <title>Info Usuarios</title>
 {% endblock meta_title_about %}
 
 {% block header_index %}
@@ -8,10 +8,10 @@
 
 {% block templates %}
 
-    <form action={% url 'biblography' %} method="post">
+    <form action={% url 'userInfo' %} method="post">
         {% csrf_token %}
        <table>
-            {{formBiblio.as_table}}
+            {{formUserInfo.as_table}}
         </table>
         <button class="btn btn-primary" type="submit">Enviar</button>
     </form> 
