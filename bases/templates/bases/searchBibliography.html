@@ -8,22 +8,88 @@
 
 {% block templates %}
 
-    <form action={% url 'searchBibliography' %} method="get">
+    {% comment %} <form action={% url 'searchBibliography' %} method="get">
         {% csrf_token %}
        <table>
             {{searching.as_table}}
         </table>
-        <button class="btn btn-primary" type="submit">Enviar</button>
-    </form> 
+        <button class="btn btn-primary" type="submit">Buscar</button>
+    </form> {% endcomment %}
+    <div class="container-md">
+        <form action={% url 'searchBibliography' %} method="get">
+            {% csrf_token %}
+            {% comment %} {{searching}} {% endcomment %}
+            <div class="mb-3">
+                {{searching}}
+            </div>
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </form>
+    </div>
     
     {% if data %}
-     Se busco por el dato: <b> {{data}} </b>  y los resultados fueron
-     {% for biblio in  biblio_searching%}
-        <ul>
-            <li>{{biblio}}</li>
-        </ul>
-     {% endfor %}
-     {% else %}
-        No se encontraron datos con la busqueda de <b> {{data}} </b> 
-    {% endif %}
+        <div class="container-md">
+            Se busco por el dato: <b> {{data}} </b>  y los resultados fueron
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Autor</th>
+                            <th scope="col">Bibliografia</th>
+                            <th scope="col">Link</th>
+                            {% if request.user.is_authenticated %}
+                                <th scope="col">Editar</th>
+                                <th scope="col">Borrar</th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for biblio in  biblio_searching%}
+                            <tr>
+                                <th scope="row" >{{biblio.id}}</th>
+                                <td>{{biblio.author}}</td>
+                                <td>{{biblio.main}}</td>
+                                <td>{{biblio.webLink}}</td>
+                                {% if request.user.is_authenticated  %}
+                                    <td><a class="btn btn-warning" href={% url 'upLoadBibliography' biblio.id %}>Editar</a></td>
+                                    <td><a class="btn btn-danger" href={% url 'deleteBibliography' biblio.id %}>Borrar</a></td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="container-md">
+                    No se encontraron datos con la busqueda de <b> {{data}} </b>
+                </div>
+            {% endif %}
+        </div>
 {% endblock templates %}
+
+{% comment %} <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Autor</th>
+                    <th scope="col">Bibliografia</th>
+                    <th scope="col">Link</th>
+                    {% if request.user.is_authenticated %}
+                        <th scope="col">Editar</th>
+                        <th scope="col">Borrar</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for biblio in  biblographyAll%}
+                    <tr>
+                        <th scope="row" >{{biblio.id}}</th>
+                        <td>{{biblio.author}}</td>
+                        <td>{{biblio.main}}</td>
+                        <td>{{biblio.webLink}}</td>
+                        {% if request.user.is_authenticated  %}
+                            <td><a class="btn btn-warning" href={% url 'upLoadBibliography' biblio.id %}>Editar</a></td>
+                            <td><a class="btn btn-danger" href={% url 'deleteBibliography' biblio.id %}>Borrar</a></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table> {% endcomment %}

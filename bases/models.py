@@ -8,6 +8,13 @@ class Blogs(models.Model):
     author = models.CharField(max_length=20)
     date = models.DateTimeField()
     # img = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=None)
+    def __str__(self):
+        return f'''Titulo: {self.title} -
+                   Subtitulo: {self.subTitle} - 
+                   Blog: {self.body} -
+                   Autor: {self.author} -
+                   Fecha: {self.date} 
+                '''
     
     
 class UserInfo(models.Model):

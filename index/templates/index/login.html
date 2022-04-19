@@ -1,0 +1,27 @@
+{% extends 'index/index.html' %}
+
+{% block meta_title_about %}
+    <title>Login</title>
+{% endblock meta_title_about %}
+
+{% block header_index %}
+{% endblock header_index %}
+
+{% block templates %}
+    {% if msj %}
+        {{msj}}
+    {% endif %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="container-md">
+             <table>
+                 {{formLogin.as_p}}
+             </table>
+             <div>
+                 <button class="btn btn-primary" type="submit">Loguearse</button>
+                 <a class="btn btn-primary" href={% url 'register' %} >Registrarse</a>
+             </div>
+         </div>
+    </form>
+{% endblock templates %}

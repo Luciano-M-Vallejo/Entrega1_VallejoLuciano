@@ -4,16 +4,34 @@
 {% endblock meta_title_about %}
 
 {% block header_index %}
+    <div class="container-md">
+        {% if request.user.is_authenticated %}
+            <a class="btn btn-success" href={% url 'creatBlog' %}>Crear Blog</a>
+        {% endif %}
+    </div>
 {% endblock header_index %}
 
 {% block templates %}
 
-    <form action={% url 'blogs' %} method="post">
-        {% csrf_token %}
-       <table>
-            {{formBlog.as_table}}
-        </table>
-        <button class="btn btn-primary" type="submit">Enviar</button>
-    </form> 
+    <div class="container-md">
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+            {% for blog in  blogsAll%}
+            <div class="accordion-item">
+                <h4 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <h3>{{blog.title}}</h3>
+                    </button>
+                </h4>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <h5>{{blog.subTitle}}</h5>
+                        <p>{{blog.body}}</p>
+                        <strong>{{blog.author}}</strong> - <code>{{blog.date}}</code> 
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
     
 {% endblock templates %}

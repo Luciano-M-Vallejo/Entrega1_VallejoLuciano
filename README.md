@@ -6,3 +6,7 @@
 
  **Ir a Busquedas para buscar todos las bibliografias existentes.**
 
+ **POR FAVOR TENER EN CUENTA USUARIO Y CONTRASEÑA**
+ **USUARIO: admin**
+ **PASS: pass123456**
+

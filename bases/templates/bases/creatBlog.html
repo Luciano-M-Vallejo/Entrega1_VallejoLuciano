@@ -1,0 +1,41 @@
+{% extends 'index/index.html' %}
+{% block meta_title_about %}
+    <title>Creando un Blog</title>
+{% endblock meta_title_about %}
+
+{% block header_index %}
+{% endblock header_index %}
+
+{% block templates %}
+
+    {% comment %} <form action={% url 'blogs' %} method="post">
+        {% csrf_token %}
+       <table>
+            {{formBlog.as_table}}
+        </table>
+        <button class="btn btn-primary" type="submit">Enviar</button>
+    </form>  {% endcomment %}
+
+    <div class="container-md">
+        <form action={% url 'blogs' %} method="post">
+            {% csrf_token %}
+            {% comment %} {{formBlog}} {% endcomment %}
+            <div class="mb-3">
+                <label for="title" class="form-label">Titulo</label>
+                <input type="text" class="form-control" id="title" aria-describedby={{formBlog.title}}
+                <label for= "subtitle" class="form-label">Subtitulo</label>
+                <input type="text" class="form-control" id="subtitle" aria-describedby={{formBlog.subTitle}}
+                <label for="author" class="form-label">Autor</label>
+                <input type="text" class="form-control" id="author" aria-describedby={{formBlog.author}}
+                <label for="date" class="form-label">Fecha</label>
+                <input type="date" class="form-control" id="date" aria-describedby={{formBlog.date}}
+            </div>
+            <div class="mb-3">
+                <label for="blog" class="form-label">Blog</label>
+                <textarea class="form-control" id="blog" rows="3" aria-describedby={{formBlog.body}}></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Enviar</button>
+        </form>
+    </div>
+    
+{% endblock templates %}

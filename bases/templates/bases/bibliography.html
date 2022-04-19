@@ -1,19 +1,56 @@
 {% extends 'index/index.html' %}
 {% block meta_title_about %}
-    <title>Agregar Bibliografia</title>
+    <title>Listado Bibliografia</title>
 {% endblock meta_title_about %}
 
 {% block header_index %}
+    <div class="container-md">
+        <a  class="btn btn-info" href={% url 'searchBibliography' %}>Buscar Bibliografia</a>
+        {% if request.user.is_authenticated %}
+            <a class="btn btn-success" href={% url 'creatBibliography' %}>Crear Bibliografia</a>
+        {% endif %}
+    </div>
 {% endblock header_index %}
 
 {% block templates %}
-
-    <form action={% url 'biblography' %} method="post">
-        {% csrf_token %}
-       <table>
-            {{formBiblio.as_table}}
+    
+    <div class="container-md">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Autor</th>
+                    <th scope="col">Bibliografia</th>
+                    <th scope="col">Link</th>
+                    {% if request.user.is_authenticated %}
+                        <th scope="col">Editar</th>
+                        <th scope="col">Borrar</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for biblio in  biblographyAll%}
+                    <tr>
+                        <th scope="row" >{{biblio.id}}</th>
+                        <td>{{biblio.author}}</td>
+                        <td>{{biblio.main}}</td>
+                        <td>{{biblio.webLink}}</td>
+                        {% if request.user.is_authenticated  %}
+                            <td><a class="btn btn-warning" href={% url 'upLoadBibliography' biblio.id %}>Editar</a></td>
+                            <td><a class="btn btn-danger" href={% url 'deleteBibliography' biblio.id %}>Borrar</a></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
         </table>
-        <button class="btn btn-primary" type="submit">Enviar</button>
-    </form> 
+    </div>
     
 {% endblock templates %}
+
+{% comment %} <ul>
+            <li>
+                {{biblio}}
+                <a href={% url 'upLoadBibliography' biblio.id %}>Editar</a>
+                <a href={% url 'deleteBibliography' biblio.id %}>Borrar</a>
+            </li>
+        </ul> {% endcomment %}

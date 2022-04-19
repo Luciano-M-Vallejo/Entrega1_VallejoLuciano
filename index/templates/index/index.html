@@ -23,23 +23,36 @@
             <div class="container">
                 <a class="btn btn-primary" href={% url 'index' %} >Home</a>
                 <a class="btn btn-primary" href={% url 'about_me' %} >Sobre mi</a>
-                <a class="btn btn-primary" href={% url 'biblography' %} >Bibliografia</a>
-                <a class="btn btn-primary" href={% url 'searchBibliography' %} >Buscar Bibliografia</a>
                 <a class="btn btn-primary" href={% url 'blogs' %} >Blogs</a>
-                <a class="btn btn-primary" href={% url 'userInfo' %} >Info Usuarios</a>
+                <a class="btn btn-primary" href={% url 'listBibliography' %} >Bibliografia</a>
+                {% comment %} <a class="btn btn-primary" href={% url 'userInfo' %} >Usuarios</a> {% endcomment %}
+                {% if request.user.is_authenticated %}
+                    <a class="btn btn-primary" href={% url 'logout' %} >Logout</a>
+                    <a href={% url 'editUser' %} >
+                        <img src={{avatar}} alt="Editar Perfil" height='40'>
+                    </a>
+                {% else %}
+                    <a class="btn btn-primary" href={% url 'login' %} >Login</a>
+                {% endif %}
             </div>
         </nav>
         <!-- Masthead-->
         {% block header_index %}
             <header class="masthead">
-                <div class="container position-relative">
-                    <div class="row justify-content-center">
-                        <div class="col-xl-6">
-                            <div class="text-center text-white">
-                                <!-- Page heading-->
-                                {% block header_image_text %}
-                                    <h1 class="mb-5">Bienvenidos a mi primera entrega de Django</h1>
-                                {% endblock header_image_text %}
+                <div class="container-md">
+                    <div class="container position-relative">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-6">
+                                <div class="text-center text-white">
+                                    <!-- Page heading-->
+                                    {% block header_image_text %}
+                                        {% if msj %}
+                                            <h1>{{msj}}</h1>
+                                        {% else %}
+                                            <h1 class="mb-5">Bienvenidos a mi primera entrega de Django</h1> {{loged}}
+                                        {% endif %}
+                                    {% endblock header_image_text %}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -48,7 +61,9 @@
         {% endblock header_index %}
         <!-- Icons Grid-->
         {% block templates %}
-            <h1>Este es el Home de la pantalla inicial</h1>
+            <div class="container-md">
+                <h1>Este es el Home de la pantalla inicial</h1>
+            </div>
         {% endblock templates %}
         <!-- Footer-->
         <footer class="footer bg-light">

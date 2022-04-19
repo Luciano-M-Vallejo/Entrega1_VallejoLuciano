@@ -1,0 +1,36 @@
+{% extends 'index/index.html' %}
+{% block meta_title_about %}
+    <title>Agregar Bibliografia</title>
+{% endblock meta_title_about %}
+
+{% block header_index %}
+{% endblock header_index %}
+
+{% block templates %}
+
+    {% comment %} <form action={% url 'creatBibliography' %} method="post">
+    {% csrf_token %}
+       <table>
+            {{formBiblio.as_table}}
+        </table>
+        <button class="btn btn-primary" type="submit">Crear</button>
+    </form>  {% endcomment %}
+      <div class="container-md">
+        <form action={% url 'creatBibliography' %} method="post">
+            {% csrf_token %}
+            {% comment %} {{formBiblio}} {% endcomment %}
+            <div class="mb-3">
+                <label for="title" class="form-label">Autor</label>
+                <input type="text" class="form-control" id="title" aria-describedby={{formBiblio.author}}
+                <label for= "subtitle" class="form-label">URL</label>
+                <input type="text" class="form-control" id="subtitle" aria-describedby={{formBiblio.webLink}}
+            </div>
+            <div class="mb-3">
+                <label for="blog" class="form-label">Bibliografia</label>
+                <textarea class="form-control" id="blog" rows="3" aria-describedby={{formBiblio.main}}</textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Crear</button>
+        </form>
+    </div>
+    
+{% endblock templates %}

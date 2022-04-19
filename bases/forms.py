@@ -7,11 +7,11 @@ class FormBibliography(forms.Form):
     
 
 class FormBlog(forms.Form):
-    title = forms.CharField(max_length=20)
-    subTitle = forms.CharField(max_length=20)
-    body = forms.CharField()
-    author = forms.CharField(max_length=20)
-    date = forms.DateTimeField()
+    title = forms.CharField(label = 'Titulo', max_length=20)
+    subTitle = forms.CharField(label = 'Subtitulo', max_length=20)
+    body = forms.CharField(label = 'Texto')
+    author = forms.CharField(label = 'Autor', max_length=20)
+    date = forms.DateField(label = 'Fecha')
 
 
 class FormUserInfo(forms.Form):
